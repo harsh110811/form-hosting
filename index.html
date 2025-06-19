@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Master Data</title>
+  <style>
+    body { font-family: Arial; padding: 15px; background: #f1f1f1; }
+    form { background: white; padding: 15px; border-radius: 8px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select { width: 70%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px 15px; }
+  </style>
+</head>
+<body>
+
+<h2>Employee Master Data Form</h2>
+
+<form id="empForm">
+  <label>1. Employee ID</label>
+  <input type="number" name="empId" required>
+
+  <label>2. Full Name</label>
+  <input type="text" name="fullName" required>
+
+  <label>3. Father Name</label>
+  <input type="text" name="fatherName" required>
+
+  <label>4. Date of Birth</label>
+  <input type="date" name="dob" required>
+
+  <label>5. Marital Status</label>
+  <select name="maritalStatus" required>
+    <option>Married</option>
+    <option>Unmarried</option>
+  </select>
+
+  <label>6. Community</label>
+  <select name="community">
+    <option>UR</option><option>SC</option><option>ST</option><option>OBC</option><option>EWS</option>
+  </select>
+
+  <label>7. Selected Community</label>
+  <select name="selectedCommunity">
+    <option>UR</option><option>SC</option><option>ST</option><option>OBC</option><option>EWS</option>
+  </select>
+
+  <label>8. PAN Number</label>
+  <input type="text" name="pan" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" maxlength="10" required>
+
+  <label>9. Aadhar Number</label>
+  <input type="text" name="aadhar" pattern="\d{12}" maxlength="12" required>
+
+  <label>10. Mobile Number</label>
+  <input type="tel" name="mobile" pattern="\d{10}" maxlength="10" required>
+
+  <label>11. Hometown</label>
+  <input type="text" name="hometown" required>
+
+  <label>12. Permanent Address</label>
+  <input type="text" name="permAddress" required>
+
+  <label>13. Address Pincode</label>
+  <input type="text" name="pincode" pattern="\d{6}" maxlength="6" required>
+
+  <label>14. NPS/GPF/SDBS</label>
+  <select name="schemeType">
+    <option>NPS</option><option>GPF</option><option>SDBS</option>
+  </select>
+
+  <label>15. Scheme ID</label>
+  <input type="text" name="schemeId" required>
+
+  <label>16. Tax Regime</label>
+  <select name="taxRegime"><option>Old</option><option>New</option></select>
+
+  <label>17. Bank Account Number</label>
+  <input type="text" name="bankAcc" required>
+
+  <label>18. IFSC Code</label>
+  <input type="text" name="ifsc" required>
+
+  <label>19. Bank Type</label>
+  <select name="bankType"><option>POSB</option><option>Others</option></select>
+
+  <label>20. Employee Type</label>
+  <select name="empType"><option>DOP</option><option>GDS</option></select>
+
+  <label>21. Recruitment Mode</label>
+  <select name="recruitMode"><option>Direct</option></select>
+
+  <label>22. Joining Date in Department</label>
+  <input type="date" name="joinDateDept" required>
+
+  <label>23. Joining Date in Present Cadre</label>
+  <input type="date" name="joinDateCadre" required>
+
+  <label>24. Employment Status</label>
+  <select name="empStatus">
+    <option>Active</option><option>Suspension</option><option>Putt of Duty</option><option>Unauthorized Absent</option>
+  </select>
+
+  <label>25. Retirement Date</label>
+  <input type="date" name="retireDate" required>
+
+  <label>26. Working Hours From</label>
+  <select name="workFrom">
+    <option>09.00</option><option>10.00</option><option>11.00</option><option>12.00</option>
+  </select>
+
+  <label>27. Working Hours To</label>
+  <select name="workTo">
+    <option>13.00</option><option>14.00</option><option>15.00</option><option>16.00</option>
+  </select>
+
+  <label>28. GDS Level</label>
+  <select name="gdsLevel">
+    <option>ABPM Leval-1</option><option>ABPM Leval-2</option><option>BPM Leval-1</option><option>BPM Leval-2</option>
+  </select>
+
+  <label>29. GDS Slab/TRCA</label>
+  <select name="gdsSlab">
+    <option>10000</option><option>12000</option><option>14000</option>
+  </select>
+
+  <label>30. GDS Email</label>
+  <input type="email" name="gdsEmail" required>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById('empForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  fetch('https://script.google.com/macros/s/AKfycbwVSk0qruEcZIjxJ5F6WY4mx_8Mh2Z52KbbfQkwdfMAGLhv4ag_ULFwMIeHPvR4zfh_oQ/exec', {  // ⬅️ Replace with Google Script Web App URL
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(res => {
+    alert("Data submitted successfully!");
+    form.reset();
+  })
+  .catch(err => alert("Error occurred: " + err));
+});
+</script>
+
+</body>
+</html>
